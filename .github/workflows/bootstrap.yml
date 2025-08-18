@@ -23,6 +23,9 @@ on:
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
+
+    environment: ${{ github.event.inputs.target_environment }}
+
     
     steps:
     - name: Checkout code
