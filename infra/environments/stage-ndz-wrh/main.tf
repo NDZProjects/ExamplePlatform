@@ -25,7 +25,6 @@ locals {
 
 module "network" {
   source      = "../../platform/core/network"
-  environment = local.env
   cidr_block  = var.network_cidr          # defined in network.tfvars
   azs         = var.availability_zones    # defined in common.tfvars
   tags        = var.common_tags           # defined in common.tfvars
