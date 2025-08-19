@@ -13,9 +13,9 @@ on:
         required: true
         type: choice
         options:
+          - stage-ndz-wrh
           - dev
           - stage
-          - stage-ndz-wrh
           - prd
           - acc
           - tst
@@ -52,16 +52,39 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-1
-    
+        aws-region: ${{ secrets.AWS_REGION }}
+    -name: Debug directory contents
+    echo "pwd: $(pwd)"
+    ls -R infra/environments/${{ github.event.inputs.target_environment }}
+
     - name: Terraform Init
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
       run: terraform init
     
     - name: Terraform Plan
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
-      run: terraform plan -var-file="common.tfvars" -var-file="network.tfvars" -var-file="compute.tfvars"
+      run:    terraform plan \
+        -var-file="common.tfvars" \
+        -var-file="network.tfvars" \
+        -var-file="security-groups.tfvars" \
+        -var-file="iam.tfvars" \
+        -var-file="database.tfvars" \
+        -var-file="ecr.tfvars"
+        -var-file="compute.tfvars" \
+         -var-file="bastion.tfvars" \
+        -var-file="cloudwatch.tfvars"
+
+
+
     
     - name: Terraform Apply
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
-      run: terraform apply -auto-approve -var-file="common.tfvars" -var-file="network.tfvars" -var-file="compute.tfvars"
+      run: terraform apply \
+        -var-file="network.tfvars" \
+        -var-file="security-groups.tfvars" \
+        -var-file="iam.tfvars" \
+        -var-file="database.tfvars" \
+        -var-file="ecr.tfvars"
+        -var-file="compute.tfvars" \
+        -var-file="bastion.tfvars" \
+        -var-file="cloudwatch.tfvars"
