@@ -13,9 +13,9 @@ on:
         required: true
         type: choice
         options:
-          - stage-ndz-wrh
           - dev
           - stage
+          - stage-ndz-wrh
           - prd
           - acc
           - tst
@@ -53,9 +53,6 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
-    -name: Debug directory contents
-    echo "pwd: $(pwd)"
-    ls -R infra/environments/${{ github.event.inputs.target_environment }}
 
     - name: Terraform Init
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
