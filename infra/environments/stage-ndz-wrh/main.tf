@@ -24,7 +24,7 @@ locals {
 }
 
 module "network" {
-  source      = "../../platform/modules/network"
+  source      = "../../platform/core/network"
   environment = local.env
   cidr_block  = var.network_cidr          # defined in network.tfvars
   azs         = var.availability_zones    # defined in common.tfvars
@@ -32,14 +32,14 @@ module "network" {
   subnet_ids  = []
 }
 
-module "compute" {
-  source        = "../../platform/modules/compute"
-  environment   = local.env
-  ami_id        = var.ami_id              # from compute.tfvars
-  instance_type = var.instance_type       # from compute.tfvars
-  subnet_ids    = module.network.private_subnet_ids
-  tags          = var.common_tags         # reuse same tag map
-}
+#module "compute" {
+#  source        = "../../platform/modules/compute"
+#  environment   = local.env
+#  ami_id        = var.ami_id              # from compute.tfvars
+#  instance_type = var.instance_type       # from compute.tfvars
+#  subnet_ids    = module.network.private_subnet_ids
+#  tags          = var.common_tags         # reuse same tag map
+#}
 
 output "vpc_id" {
   description = "The VPC created by the network module"
