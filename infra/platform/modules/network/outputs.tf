@@ -15,3 +15,8 @@
 #  cidr_block        = cidrsubnet(var.cidr_block, var.subnet_mask_bits, index(var.azs, each.key))
 #  tags              = merge(var.tags, { Name = "${var.environment}-subnet-${each.key}" })
 #}
+
+output "subnet_ids" {
+  description = ""
+  value = conat(public_subnet_ids, private_subnet_ids)
+}

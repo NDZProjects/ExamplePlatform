@@ -20,7 +20,6 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   tags = merge(var.common_tags, { Name = var.vpc_name })
-  command = "echo \"${local.trace}\""
 }
 
 # Internet Gateway for Public Subnets

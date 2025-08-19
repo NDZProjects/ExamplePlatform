@@ -1,5 +1,3 @@
-providers = { aws = aws }
-
 resource "aws_vpc" "this" {
   cidr_block = var.cidr_block
   tags       = merge(var.tags, { Name = "${var.environment}-vpc" })

@@ -29,6 +29,7 @@ module "network" {
   cidr_block  = var.network_cidr          # defined in network.tfvars
   azs         = var.availability_zones    # defined in common.tfvars
   tags        = var.common_tags           # defined in common.tfvars
+  subnet_ids  = []
 }
 
 module "compute" {
@@ -36,7 +37,7 @@ module "compute" {
   environment   = local.env
   ami_id        = var.ami_id              # from compute.tfvars
   instance_type = var.instance_type       # from compute.tfvars
-  subnet_ids    = module.network.subnet_ids
+  subnet_ids    = module.network.private_subnet_ids
   tags          = var.common_tags         # reuse same tag map
 }
 

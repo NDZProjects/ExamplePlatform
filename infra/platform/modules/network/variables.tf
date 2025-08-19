@@ -1,8 +1,12 @@
-variable "environment" {
-  description = "Name of the environment (e.g. stage-ndz-wrh)"
-  type        = string
-}
+#variable "environment" {
+#  description = "Name of the environment (e.g. stage-ndz-wrh)"
+#  type        = string
+#}
 
+variable "vpc_id" {
+  description = "The target vpc id"
+  type = string
+}
 variable "cidr_block" {
   description = "The CIDR block for the VPC"
   type        = string
@@ -21,6 +25,18 @@ variable "subnet_mask_bits" {
 
 variable "tags" {
   description = "Common tags to apply to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "private_subnet_ids" {
+  description = "private subnet ids"
+  type        = map(string)
+  default     = {}
+}
+
+variable "public_subnet_ids" {
+  description = "public subnet ids"
   type        = map(string)
   default     = {}
 }
