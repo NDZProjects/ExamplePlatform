@@ -1,6 +1,4 @@
-provider "aws" {
-  region = var.tags["Region"]  # or pass aws_region separately
-}
+providers = { aws = aws }
 
 resource "aws_vpc" "this" {
   cidr_block = var.cidr_block

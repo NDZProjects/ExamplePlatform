@@ -1,5 +1,7 @@
 data "aws_caller_identity" "current" {}
 
+providers = { aws = aws }
+
 resource "null_resource" "ensure_log_group_deleted" {
   provisioner "local-exec" {
     command = <<EOT

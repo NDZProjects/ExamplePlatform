@@ -1,3 +1,5 @@
+providers = { aws = aws }
+
 # EC2 and compute configuration
 ami_id               = "ami-01f23391a59163da9"
 instance_type        = "t2.micro"

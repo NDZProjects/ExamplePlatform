@@ -1,3 +1,5 @@
+providers = { aws = aws }
+
 # ECR specific configuration
 image_tag_mutability = "MUTABLE"
 scan_on_push        = true
