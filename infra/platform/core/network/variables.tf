@@ -1,25 +1,47 @@
-variable "vpc_cidr" {
-  description = "CIDR block for the VPC"
+variable "region" {
   type        = string
+  description = "AWS region to deploy into"
 }
 
-variable "availability_zones" {
-  description = "List of AZs to place subnets in"
-  type        = list(string)
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR block for the VPC"
 }
 
-variable "public_subnet_cidrs" {
-  description = "CIDR blocks for the public subnets"
-  type        = list(string)
+variable "subnet_cidr" {
+  type        = string
+  description = "CIDR block for the Subnet"
 }
 
-variable "private_subnet_cidrs" {
-  description = "CIDR blocks for the private subnets"
-  type        = list(string)
+variable "availability_zone" {
+  type        = string
+  description = "Availability Zone for the Subnet"
 }
 
-variable "tags" {
-  description = "Map of tags to apply to all network resources"
-  type        = map(string)
-  default     = {}
+variable "security_group_name" {
+  type        = string
+  description = "Security Group name"
+  default     = "network-sg"
+}
+
+variable "security_group_ingress" {
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  description = "List of ingress rules for the SG"
+  default     = []
+}
+
+variable "security_group_egress" {
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  description = "List of egress rules for the SG"
+  default     = []
 }
