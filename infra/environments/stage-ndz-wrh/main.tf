@@ -1,5 +1,6 @@
 module "network" {
   source      = "../../platform/core/network"
+  vpc_name    = var.vpc_name
   cidr_block  = var.network_cidr
   tags        = var.common_tags
   availability_zones = var.availability_zones

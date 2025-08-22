@@ -2,7 +2,11 @@ variable "environment" {
   description = "The target environment name"
   type        = string
 }
-
+variable "vpc_name" {
+  description = "Name of the VPC"
+  type        = string
+  default     = "dev-vpc"
+}
 variable "region" {
   description = "AWS region for resources"
   type        = string

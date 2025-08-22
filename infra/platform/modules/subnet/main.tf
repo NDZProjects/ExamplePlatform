@@ -4,6 +4,8 @@ resource "aws_subnet" "this" {
   availability_zone = var.availability_zone
   tags = {
     Name = var.name
+    Environment       = var.env_name
+    Type              = var.type # "public" or "private"
   }
 }
 
@@ -19,4 +21,12 @@ variable "availability_zone" {
 variable "name" {
   type    = string
   default = "default-subnet"
+}
+variable "env_name" {
+  description = "The environment name (e.g., stage, prod)"
+  type        = string
+}
+variable "type" {
+  description = "Type of the subnet (public or private)"
+  type        = string
 }

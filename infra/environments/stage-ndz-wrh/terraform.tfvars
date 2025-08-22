@@ -7,6 +7,8 @@
 # Or use this single file approach by including all necessary variables:
 environment = "stage-ndz-wrh"
 region      = "eu-west-1"
+vpc_name = "stage-vpc"
+
 
 # Common environment configuration
 #environment = "stage-ndz-wrh"

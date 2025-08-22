@@ -2,6 +2,14 @@ variable "region" {
   type        = string
   description = "AWS region to deploy into"
 }
+variable "env_name" {
+  type        = string
+  description = "target environment name"
+}
+variable "vpc_name" {
+  type        = string
+  description = "the target name of the vpc"
+}
 
 variable "vpc_cidr" {
   type        = string
@@ -44,4 +52,13 @@ variable "security_group_egress" {
   }))
   description = "List of egress rules for the SG"
   default     = []
+}
+
+variable "subnets" {
+  description = "Definition of subnets for the environment"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = string
+    type              = string # "public" or "private"
+  }))
 }
