@@ -2,7 +2,9 @@
 provider "aws" {
   region = var.region
 }
+
 locals{
+
   subnets = {
     private_1 = {
       cidr_block        = "10.0.5.0/24"
@@ -25,7 +27,6 @@ locals{
       type              = "public"
     }
   }
-
 }
 module "network" {
   source            = "../../platform/core/network"
@@ -34,7 +35,7 @@ module "network" {
   vpc_cidr          = var.vpc_cidr
   subnet_cidr       = var.subnet_cidr
   availability_zone = var.availability_zone
-  env_name          = ""
+  env_name          = var.env_name
   subnets = local.subnets
 }
 

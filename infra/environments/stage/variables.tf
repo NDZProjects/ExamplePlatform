@@ -21,7 +21,14 @@ variable "env_name" {
 }
 
 
+
 variable "availability_zones" {
   description = "List of availability zones for the selected AWS region"
   type        = list(string)
 }
+variable "global_tags" {
+  default = {
+    Environment = "stage"
+  }
+}
+

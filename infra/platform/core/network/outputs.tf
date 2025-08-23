@@ -1,11 +1,8 @@
 output "vpc_id" {
   value = module.vpc.vpc_id
 }
-
-output "subnet_id" {
-  value = module.subnet.subnet_id
-}
-
-output "security_group_id" {
-  value = module.security_group.security_group_id
+output "public_subnet_ids" {
+  description = "List of IDs for Public Subnets"
+#  value       = #aws_subnet.public[*].id
+  value = module.vpc.public_subnets
 }
