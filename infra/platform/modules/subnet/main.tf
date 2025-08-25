@@ -19,10 +19,7 @@ variable "cidr_block" {
 variable "availability_zone" {
   type = string
 }
-variable "name" {
-  type    = string
-  default = "default-subnet"
-}
+
 variable "env_name" {
   description = "The environment name (e.g., stage, prod)"
   type        = string
