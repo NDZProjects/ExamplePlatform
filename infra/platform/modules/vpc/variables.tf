@@ -1,90 +1,61 @@
-variable "environment" {
-  description = "Environment for deployment"
-  type        = string
-  #default =
-}
-
-variable "common_tags" {
-  description = "Common tags for resources"
-  type        = map(string)
-}
-
 variable "region" {
-  description = "AWS region"
   type        = string
+  description = "AWS region to deploy the VPC into"
 }
-
-variable "instance_tenancy" {
-  description = "VPC instance tenancy"
+variable "name" {
+  type    = string
+  default = "default-vpc"
+}
+variable "cidr_block" {
   type        = string
-}
-
-variable "enable_dns_support" {
-  description = "Enable DNS support for VPC"
-  type        = bool
-}
-
-variable "enable_dns_hostnames" {
-  description = "Enable DNS hostnames for VPC"
-  type        = bool
-}
-
-variable "vpc_name" {
-  description = "Name of the VPC"
-  type        = string
-}
-
-variable "vpc_cidr" {
   description = "CIDR block for the VPC"
+}
+
+# List of CIDR blocks for public subnets
+variable "public_subnet_cidrs" {
+  description = "List of CIDR blocks for public subnets"
+  type        = list(string)
+  default     = []
+}
+
+# List of CIDR blocks for private subnets
+variable "private_subnet_cidrs" {
+  description = "List of CIDR blocks for private subnets"
+  type        = list(string)
+  default     = []
+}
+
+# Enable DNS Support in the VPC
+variable "enable_dns_support" {
+  description = "Whether to enable DNS support in the VPC"
+  type        = bool
+  default     = true
+}
+
+# Enable DNS Hostnames in the VPC
+variable "enable_dns_hostnames" {
+  description = "Whether to enable DNS hostnames in the VPC"
+  type        = bool
+  default     = true
+}
+
+# Map Public IP Addresses on Instances Launched in Public Subnets
+variable "map_public_ip_on_launch" {
+  description = "Whether to map a public IP address to instances launched in public subnets"
+  type        = bool
+  default     = true
+}
+
+# Instance Tenancy Setting for the VPC
+variable "instance_tenancy" {
+  description = "The instance tenancy option for the VPC. Can be 'default' or 'dedicated'"
   type        = string
+  default     = "default"
 }
 
-variable "internet_gateway_name" {
-  description = "Name of the Internet Gateway"
-  type        = string
+# Global Tags for Resources
+variable "global_tags" {
+  description = "Map of tags to apply to all resources"
+  type        = map(string)
+  default     = {}
 }
-
-variable "total_nat_gateway_required" {
-  description = "Number of NAT Gateways required"
-  type        = number
-}
-
-variable "eip_for_nat_gateway_name" {
-  description = "Name prefix for NAT Gateway Elastic IPs"
-  type        = string
-}
-
-variable "nat_gateway_name" {
-  description = "Name prefix for NAT Gateways"
-  type        = string
-}
-
-
-###Private App Subnets###
-variable "private_subnets" {
-  type = object({
-    routes                   = list(any)
-    cidrs_blocks             = list(string)
-    subnets_name_prefix      = string
-    route_table_name         = string
-  })
-}
-
-
-###Public Subnets###
-variable "public_subnets" {
-  type = object({
-    routes                   = list(any)
-    cidrs_blocks             = list(string)
-    subnets_name_prefix      = string
-    map_public_ip_on_launch  = bool
-    route_table_name         = string
-  })
-}
-
-### Availability Zones ###
-variable "availability_zones" {
-  type    = list(string)
-  default = ["eu-west-1a", "eu-west-1b"]  # Or use data source for dynamic values
-}
-
