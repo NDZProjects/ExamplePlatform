@@ -33,7 +33,8 @@ module "network" {
   vpc_name          = var.vpc_name
   region            = var.region
   vpc_cidr          = var.vpc_cidr
-  subnet_cidr       = var.subnet_cidr
+  public_subnet_cidr = var.public_subnet_cidr
+  private_subnet_cidr = var.private_subnet_cidr
   availability_zone = var.availability_zone
   env_name          = var.env_name
   subnets = local.subnets

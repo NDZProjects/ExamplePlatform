@@ -32,3 +32,8 @@ variable "public_subnet_ids" {
     error_message = "The public_subnet_ids variable must not be empty. Please provide at least one Public Subnet ID."
   }
 }
+variable "tags" {
+  description = "resource tags"
+  type = map(string)
+  default = null
+}

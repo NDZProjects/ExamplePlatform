@@ -4,7 +4,7 @@ resource "aws_subnet" "this" {
   availability_zone = var.availability_zone
 
   tags = {
-    Name = var.name
+    Name =            var.env_name + var.type + "-subnet"
     Environment       = var.env_name
     Type              = var.type # "public" or "private"
   }
