@@ -57,8 +57,8 @@ jobs:
     - name: Terraform Init
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
       run: terraform init |
-        -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" \
-        -backend-config="key=terraform.tfstate" \
+        -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" |
+        -backend-config="key=terraform.tfstate" |
         -backend-config="region=${{ secrets.AWS_REGION }}"
     
     - name: Terraform Plan
