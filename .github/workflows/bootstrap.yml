@@ -56,20 +56,17 @@ jobs:
 
     - name: Terraform Init
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
-      run: terraform init |
-        -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" |
-        -backend-config="key=terraform.tfstate" |
-        -backend-config="region=${{ secrets.AWS_REGION }}"
+      run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" -backend-config="key=terraform.tfstate" -backend-config="region=${{ secrets.AWS_REGION }}"
     
     - name: Terraform Plan
       working-directory: ./infra/environments/${{ github.event.inputs.target_environment }}
-      run:    terraform plan \
+      run:    terraform plan |
         -var-file="common.tfvars" \
         -var-file="network.tfvars" \
         -var-file="security-groups.tfvars" \
         -var-file="iam.tfvars" \
         -var-file="database.tfvars" \
-        -var-file="ecr.tfvars"
+        -var-file="ecr.tfvars" \
         -var-file="compute.tfvars" \
          -var-file="bastion.tfvars" \
         -var-file="cloudwatch.tfvars"
